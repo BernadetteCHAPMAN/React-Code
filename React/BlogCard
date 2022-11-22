@@ -1,0 +1,57 @@
+import React from "react";
+import debug from "sabio-debug";
+import PropTypes from "prop-types";
+import { Card, Button, Col } from "react-bootstrap";
+import "./blogs.css";
+import { formatDate } from "utils/dateFormater";
+
+const _logger = debug.extend("BlogCard");
+
+function BlogCard(props) {
+  _logger(props);
+
+  const aBlog = props.blog;
+
+  const newDate = formatDate(aBlog.datePublished);
+  _logger("New date", newDate);
+
+  return (
+    <Col className="col-4">
+      <Card className="mb-4 shadow-lg blog-card">
+        <img className="card-img-top" src={aBlog.imageUrl} alt="" />
+        <Card.Body className="blog-card">
+          <Card.Title>
+            <strong>{aBlog.title}</strong>
+          </Card.Title>
+          <Card.Text className="card-text">{newDate}</Card.Text>
+          <div className="d-flex flex-column gap-2" style={{ display: "flex" }}>
+            <Button
+              variant="primary"
+              className="read-me-button mx-auto"
+              style={{ width: "10vw" }}
+            >
+              Read Me
+            </Button>
+            <Button
+              variant="secondary"
+              className="edit-button mx-auto "
+              style={{ width: "10vw" }}
+            >
+              Edit
+            </Button>
+          </div>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
+}
+
+BlogCard.propTypes = {
+  blog: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    datePublished: PropTypes.string.isRequired,
+  }),
+};
+
+export default BlogCard;
