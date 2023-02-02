@@ -21,29 +21,27 @@ function Register () {
   console.log(userFormData);
   const onFormFieldChange = (event) => {
     console.log("onChange", { syntheticEvent: event });
-   // debugger;
-    //capture info you need from event here as the event object will fall out of scope quickly
-    //the event.target will represent the input
+   
     const target = event.target;
-    //this is the value of the input, the value in the text box the user types into
+   
     const value = target.value;
-    //this is the name (so be sure to give your form fields a name attribute)
+  
     const name = target.name;
-    //set the new state using the old property name / object key and using the new value for formData
+ 
     setUserFormData((prevState) => {
       console.log("updater onChange");
-      // copy the personData object from state using the spread operator
+  
       const newUserObject = {
         ...prevState,
       };
-      //change the value of the copied object using the name and using bracket notation
+    
       newUserObject[name] = value;
-       //in functional components the name of this object/variable does not matter
+  
       return newUserObject;
     });
   };
 
-//CLICK HANDLER
+
  const onRegisterClick = e => {
   console.log("onClick is working")
   e.preventDefault();
